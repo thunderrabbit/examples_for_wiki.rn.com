@@ -136,7 +136,7 @@ class Hooks implements
 		];
 		// Very important to escape user data with htmlspecialchars() to prevent
 		// an XSS security vulnerability.
-		$html = '<pre>Dump Tag: '
+		$html = '<pre>Dumparoo: '
 			. htmlspecialchars( FormatJson::encode( $dump, /*prettyPrint=*/true ) )
 			. '</pre>';
 
