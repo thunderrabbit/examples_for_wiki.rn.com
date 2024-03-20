@@ -88,9 +88,9 @@ class Hooks implements
 	 */
 	public function onParserFirstCallInit( $parser ) {
 		// Add the following to a wiki page to see how it works:
-		// <dump>test</dump>
-		// <dump foo="bar" baz="quux">test content</dump>
-		$parser->setHook( 'dump', [ self::class, 'parserTagDump' ] );
+		// <permalink>test</permalink>
+		// <permalink foo="bar" baz="quux">test content</permalink>
+		$parser->setHook( 'permalink', [ self::class, 'parserTagPermalink' ] );
 
 		// Add the following to a wiki page to see how it works:
 		// {{#echo: hello }}
@@ -119,7 +119,7 @@ class Hooks implements
 	}
 
 	/**
-	 * Parser hook handler for <dump>
+	 * Parser hook handler for <permalink>
 	 *
 	 * @param string $data The content of the tag.
 	 * @param array $attribs The attributes of the tag.
@@ -129,15 +129,15 @@ class Hooks implements
 	 *  arguments ({{{1}}}) this hook was used with.
 	 * @return string HTML to insert in the page.
 	 */
-	public static function parserTagDump( $data, $attribs, $parser, $frame ) {
-		$dump = [
+	public static function parserTagPermalink( $data, $attribs, $parser, $frame ) {
+		$permalink = [
 			'content' => $data,
 			'atributes' => (object)$attribs,
 		];
 		// Very important to escape user data with htmlspecialchars() to prevent
 		// an XSS security vulnerability.
-		$html = '<pre>Dumparoo: '
-			. htmlspecialchars( FormatJson::encode( $dump, /*prettyPrint=*/true ) )
+		$html = '<pre>Permalink yay: '
+			. htmlspecialchars( FormatJson::encode( $permalink, /*prettyPrint=*/true ) )
 			. '</pre>';
 
 		return $html;
