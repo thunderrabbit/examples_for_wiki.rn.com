@@ -91,14 +91,6 @@ class Hooks implements
 		// <permalink>test</permalink>
 		// <permalink foo="bar" baz="quux">test content</permalink>
 		$parser->setHook( 'permalink', [ self::class, 'parserTagPermalink' ] );
-
-		// Add the following to a wiki page to see how it works:
-		// {{#echo: hello }}
-		$parser->setFunctionHook( 'echo', [ self::class, 'parserFunctionEcho' ] );
-
-		// Add the following to a wiki page to see how it works:
-		// {{#showme: hello | hi | there }}
-		$parser->setFunctionHook( 'showme', [ self::class, 'parserFunctionShowme' ] );
 	}
 
 	/**
@@ -129,48 +121,8 @@ class Hooks implements
 	 *  arguments ({{{1}}}) this hook was used with.
 	 * @return string HTML to insert in the page.
 	 */
-	public static function parserTagPermalink( $data, $attribs, $parser, $frame ) {
-		$permalink = [
-			'content' => $data,
-			'atributes' => (object)$attribs,
-		];
-		// Very important to escape user data with htmlspecialchars() to prevent
-		// an XSS security vulnerability.
-		$html = '<pre>Permalink yay: '
-			. htmlspecialchars( FormatJson::encode( $permalink, /*prettyPrint=*/true ) )
-			. '</pre>';
-
+	public static function parserTagPermalink($data, $attribs, $parser, $frame ) {
+		$html = '<pre>Permalink yay</pre>';
 		return $html;
-	}
-
-	/**
-	 * Parser function handler for {{#echo: .. }}
-	 *
-	 * @param Parser $parser
-	 * @param string $value
-	 *
-	 * @return string HTML to insert in the page.
-	 */
-	public static function parserFunctionEcho( Parser $parser, $value ) {
-		return '<strong>Echo says: ' . htmlspecialchars( $value ) . '</strong>';
-	}
-
-	/**
-	 * Parser function handler for {{#showme: .. | .. }}
-	 *
-	 * @param Parser $parser
-	 * @param string $value
-	 * @param string ...$args
-	 * @return string HTML to insert in the page.
-	 */
-	public static function parserFunctionShowme( Parser $parser, string $value, ...$args ) {
-		$showme = [
-			'value' => $value,
-			'arguments' => $args,
-		];
-
-		return '<pre>Showme Function: '
-			. htmlspecialchars( FormatJson::encode( $showme, /*prettyPrint=*/true ) )
-			. '</pre>';
 	}
 }
