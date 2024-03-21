@@ -9,13 +9,11 @@
 
 namespace MediaWiki\Extension\Example;
 
-use FormatJson;
 use MediaWiki\Permissions\PermissionManager;
 use OutputPage;
 use Parser;
 use PPFrame;
 use Skin;
-use SkinTemplate;
 
 class Hooks implements
 	\MediaWiki\Hook\BeforePageDisplayHook,
