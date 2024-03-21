@@ -20,8 +20,7 @@ use SkinTemplate;
 class Hooks implements
 	\MediaWiki\Hook\BeforePageDisplayHook,
 	\MediaWiki\Hook\ParserFirstCallInitHook,
-	\MediaWiki\Hook\ParserGetVariableValueSwitchHook,
-	\MediaWiki\Hook\SkinTemplateNavigation__UniversalHook
+	\MediaWiki\Hook\ParserGetVariableValueSwitchHook
 {
 
 	/** @var PermissionManager */
@@ -91,23 +90,6 @@ class Hooks implements
 		// <permalink>test</permalink>
 		// <permalink foo="bar" baz="quux">test content</permalink>
 		$parser->setHook( 'permalink', [ self::class, 'parserTagPermalink' ] );
-	}
-
-	/**
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/SkinTemplateNavigation
-	 * @param SkinTemplate $skin
-	 * @param array &$content_navigation
-	 */
-	public function onSkinTemplateNavigation__Universal( $skin, &$content_navigation ): void {
-		$action = $skin->getRequest()->getText( 'action' );
-
-		if ( $skin->getTitle()->getNamespace() !== NS_SPECIAL ) {
-			$content_navigation['actions']['myact'] = [
-				'class' => $action === 'myact' ? 'selected' : false,
-				'text' => $skin->msg( 'contentaction-myact' )->text(),
-				'href' => $skin->getTitle()->getLocalURL( 'action=myact' ),
-			];
-		}
 	}
 
 	/**

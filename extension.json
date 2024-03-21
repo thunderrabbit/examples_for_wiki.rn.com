@@ -101,18 +101,7 @@
 		]
 	},
 	"Hooks": {
-		"BeforePageDisplay": "handleHooks",
-		"ParserFirstCallInit": "handleHooks",
-		"ParserGetVariableValueSwitch": "handleHooks",
-		"SkinTemplateNavigation::Universal": "handleHooks",
-		"MagicWordwgVariableIDs": {
-			"handler": "handleMoreHooks",
-			"deprecated": true
-		},
-		"GetMagicVariableIDs": "handleMoreHooks",
-		"LoadExtensionSchemaUpdates": {
-			"handler": "handleMoreHooks"
-		}
+		"ParserFirstCallInit": "handleHooks"
 	},
 	"HookHandlers": {
 		"handleHooks": {
