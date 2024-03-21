@@ -10,15 +10,11 @@
 namespace MediaWiki\Extension\Example;
 
 use MediaWiki\Permissions\PermissionManager;
-use OutputPage;
 use Parser;
 use PPFrame;
-use Skin;
 
 class Hooks implements
-	\MediaWiki\Hook\BeforePageDisplayHook,
-	\MediaWiki\Hook\ParserFirstCallInitHook,
-	\MediaWiki\Hook\ParserGetVariableValueSwitchHook
+	\MediaWiki\Hook\ParserFirstCallInitHook
 {
 
 	/** @var PermissionManager */
@@ -31,49 +27,6 @@ class Hooks implements
 		$this->permissionManager = $permissionManager;
 	}
 
-	/**
-	 * Customisations to OutputPage right before page display.
-	 *
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/BeforePageDisplay
-	 * @param OutputPage $out
-	 * @param Skin $skin
-	 */
-	public function onBeforePageDisplay( $out, $skin ): void {
-		if ( $this->permissionManager->userCan( 'read', $out->getUser(), $out->getTitle() ) ) {
-			global $wgExampleEnableWelcome;
-			if ( $wgExampleEnableWelcome ) {
-				// Load our module on all pages
-				$out->addModules( 'ext.Example.welcome' );
-			}
-		}
-	}
-
-	/**
-	 * Parser magic word handler for {{MYWORD}}.
-	 *
-	 * @return string Wikitext to be rendered in the page.
-	 */
-	public static function parserGetWordMyword() {
-		global $wgExampleMyWord;
-		return wfEscapeWikiText( $wgExampleMyWord );
-	}
-
-	/**
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ParserGetVariableValueSwitch
-	 * @param Parser $parser
-	 * @param array &$cache
-	 * @param string $magicWordId
-	 * @param string &$ret
-	 * @param PPFrame $frame
-	 *
-	 */
-	public function onParserGetVariableValueSwitch( $parser, &$cache, $magicWordId, &$ret, $frame ) {
-		if ( $magicWordId === 'myword' ) {
-			// Return value and cache should match. Cache is used to save
-			// additional call when it is used multiple times on a page.
-			$ret = $cache['myword'] = self::parserGetWordMyword();
-		}
-	}
 
 	/**
 	 * Register parser hooks.
