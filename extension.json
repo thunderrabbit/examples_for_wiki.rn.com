@@ -22,8 +22,7 @@
 	},
 	"HookHandlers": {
 		"handleHooks": {
-			"class": "MediaWiki\\Extension\\Example\\Hooks",
-			"services": [ "PermissionManager" ]
+			"class": "MediaWiki\\Extension\\Example\\Hooks"
 		}
 	},
 	"manifest_version": 2

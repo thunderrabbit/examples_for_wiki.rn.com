@@ -12,24 +12,12 @@ namespace MediaWiki\Extension\Example;
 require_once '/home/robuwikipix/art.robnugen.com/includes/mysql.php';
 require_once '/home/robuwikipix/art.robnugen.com/includes/lilurl.php';
 
-use MediaWiki\Permissions\PermissionManager;
 use Parser;
 use PPFrame;
 
 class Hooks implements
 	\MediaWiki\Hook\ParserFirstCallInitHook
 {
-
-	/** @var PermissionManager */
-	private $permissionManager;
-
-	/**
-	 * @param PermissionManager $permissionManager example injected service
-	 */
-	public function __construct( PermissionManager $permissionManager ) {
-		$this->permissionManager = $permissionManager;
-	}
-
 
 	/**
 	 * Register parser hooks.
