@@ -2,7 +2,7 @@
 // phpcs:disable MediaWiki.NamingConventions.LowerCamelFunctionsName.FunctionName
 
 /**
- * Hooks for Example extension.
+ * ArtRobNugenComPermalinks for Example extension.
  *
  * @file
  */
@@ -15,7 +15,7 @@ require_once '/home/robuwikipix/art.robnugen.com/includes/lilurl.php';
 use Parser;
 use PPFrame;
 
-class Hooks implements
+class ArtRobNugenComPermalinks implements
 	\MediaWiki\Hook\ParserFirstCallInitHook
 {
 

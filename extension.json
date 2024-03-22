@@ -22,7 +22,7 @@
 	},
 	"HookHandlers": {
 		"handleHooks": {
-			"class": "RobNugen\\Hooks"
+			"class": "RobNugen\\ArtRobNugenComPermalinks"
 		}
 	},
 	"manifest_version": 2
