@@ -7,7 +7,7 @@
  * @file
  */
 
-namespace MediaWiki\Extension\Example;
+namespace RobNugen;
 
 require_once '/home/robuwikipix/art.robnugen.com/includes/mysql.php';
 require_once '/home/robuwikipix/art.robnugen.com/includes/lilurl.php';
